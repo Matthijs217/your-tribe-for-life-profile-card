@@ -5,6 +5,9 @@
     const member = data.members[0]; // We pakken de eerste naam uit de array
 </script>
 
+<!-- Autoplay voor het automatisch afspelen en loop zodat die opnieuw kan afspelen na het einde -->
+<video class="bg-video" src="/newyork.webm" autoplay loop muted></video>
+
 <main>
     <section>
         <div class="profile-pic">
@@ -20,25 +23,33 @@
         <h1>{member.name}</h1>
         <p class="bio">{member.bio}</p>
 
-        <div class="details">
+        <div class="details-grid">
             <details>
                 <summary>Favoriete hobby</summary>
-                <p>{member.fav_hobby}</p>
+                <div class="content">
+                    <p>{member.fav_hobby}</p>
+                </div>
             </details>
                 
             <details>
                 <summary>Favoriete Keuken</summary>
-                <p>{member.fav_kitchen}</p>
+                <div class="content">
+                    <p>{member.fav_kitchen}</p>
+                </div>
             </details>
 
             <details>
                 <summary>Favoriete Emoji</summary>
-                <p>{member.fav_emoji}</p>
+                <div class="content">
+                    <p>{member.fav_emoji}</p>
+                </div>
             </details>
 
             <details>
                 <summary>Favoriet Dier</summary>
-                <p>{member.fav_animal}</p>
+                <div class="content">
+                    <p>{member.fav_animal}</p>
+                </div>
             </details>
         </div>
 
@@ -55,27 +66,51 @@
                 <img src="/linkedin.webp" alt="LinkedIn logo">
             </a>
         </div>
+
+        <img src="/noname.webp" alt="">
     </section>
 </main>
 
-
 <style>
     main {
-        height: 100vh;
-        width: 100%;
-        background-image: url("/newyork.webp");
-        background-size: cover;
+        position: relative;
+        min-height: 100vh;
+        z-index: 0;
+        overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-
+    .bg-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+        pointer-events: none;
+    }
     section {
-        background-color: rgba(255, 255, 255, 0.89);
-        padding: 3rem 2.75rem;
+        position: relative;
+        z-index: 1;
+        background-color: rgba(255, 255, 255, 0.92);
+        padding: 1rem 1.75rem;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        height: 85vh;
+        width: clamp(400px, 65%, 90vw);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: .25em;
+        @media (min-width: 1100px) {
+            height: 70vh;
+            gap: 1.5em;
+        }
     }
+
     .profile-pic {
         display: flex;
         justify-content: center;
@@ -90,7 +125,7 @@
 
     .flag-usa {
         display: block;
-        margin: 2.5em auto;
+        margin: 0.5em auto;
         width: 150px;
         height: auto;
         border: 1px solid #ccc;
@@ -102,23 +137,58 @@
         font-family: 'Gotham', 'Times New Roman', Times, serif;
         margin: 0;
         padding: 0;
+        @media (min-width: 600px) {
+            font-size: 2.5em;
+        }
     }
     
     .bio {
         margin-top: .25em;
         text-align: center;
         color: #555;
+        @media (min-width: 600px) {
+            font-size: 1.25em;
+        }
     }
 
-    .details {
+    .details-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2em;
+        grid-template-columns:1fr;
+        @media (min-width: 600px) {
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+        }
+    }
+
+    details:not([open]) {
+        height: 8vh;
     }
 
     details {
-        margin-top: 1em;
         cursor: pointer;
+    }
+
+    @media (min-width: 1100px) {
+        details:nth-of-type(1) {
+            position: absolute;
+            top: 15%;
+            left: 10%;
+        }
+        details:nth-of-type(2) {
+            position: absolute;
+            top: 15%;
+            right: 10%;
+        }
+        details:nth-of-type(3) {
+            position: absolute;
+            bottom: 15%;
+            left: 10%;
+        }
+        details:nth-of-type(4) {
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+        }
     }
 
     summary {
@@ -148,17 +218,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 1.5em;
-        margin-top: 1.5em;
+        gap: 1em;
         img {
             object-fit: cover;
             border-radius: 50%;
-            width: 140px;
-            height: 140px;
-        }
-        a:nth-of-type(1) img {
-            height: 100px;
-            width: 100px;
+            width: 85px;
+            height: 85px;
         }
     }
 
