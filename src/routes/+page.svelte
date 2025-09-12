@@ -12,7 +12,7 @@
     <section>
         <div class="profile-pic">
             <img
-                src={`https://fdnd.directus.app/assets/${member.mugshot}?width=140&height=200`}
+                src={`https://fdnd.directus.app/assets/${member.mugshot}?width=200&height=200`}
                 alt={`portret ${member.name}`}
                 height="200"
                 width="140"
@@ -24,28 +24,28 @@
         <p class="bio">{member.bio}</p>
 
         <div class="details-grid">
-            <details>
+            <details name="favorites" open>
                 <summary>Favoriete hobby</summary>
                 <div class="content">
                     <p>{member.fav_hobby}</p>
                 </div>
             </details>
                 
-            <details>
+            <details name="favorites">
                 <summary>Favoriete Keuken</summary>
                 <div class="content">
                     <p>{member.fav_kitchen}</p>
                 </div>
             </details>
 
-            <details>
+            <details name="favorites">
                 <summary>Favoriete Emoji</summary>
                 <div class="content">
                     <p>{member.fav_emoji}</p>
                 </div>
             </details>
 
-            <details>
+            <details name="favorites">
                 <summary>Favoriet Dier</summary>
                 <div class="content">
                     <p>{member.fav_animal}</p>
@@ -54,16 +54,16 @@
         </div>
 
         <a href="https://www.instagram.com/stories/highlights/18467473987075747/">
-            <img class="flag-usa" src="/usa.webp" alt="Vlag van de Verenigde Staten">
+            <img class="flag-usa" src="/usa.webp" alt="Vlag van de Verenigde Staten" width="100" height="53">
         </a>
 
         <div class="socials">
             <a href="https://github.com/Matthijs217">
-                <img src="/github.webp" alt="GitHub logo">
+                <img src="/github.webp" alt="GitHub logo" width="85" height="85">
             </a>
 
             <a href="https://www.linkedin.com/in/matthijs-ten-brink-7620612a8/">
-                <img src="/linkedin.webp" alt="LinkedIn logo">
+                <img src="/linkedin.webp" alt="LinkedIn logo" width="85" height="85">
             </a>
         </div>
     </section>
@@ -102,7 +102,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: .25em;
+        gap: .75em;
         @media (min-width: 1100px) {
             padding: 3rem 1.75rem;
             height: 70vh;
