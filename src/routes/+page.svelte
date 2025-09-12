@@ -66,8 +66,6 @@
                 <img src="/linkedin.webp" alt="LinkedIn logo">
             </a>
         </div>
-
-        <img src="/noname.webp" alt="">
     </section>
 </main>
 
@@ -95,17 +93,18 @@
         position: relative;
         z-index: 1;
         background-color: rgba(255, 255, 255, 0.92);
-        padding: 1rem 1.75rem;
+        padding: 1.5rem 1.75rem;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         height: 85vh;
-        width: clamp(400px, 65%, 90vw);
+        width: clamp(230px, 65%, 90vw);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: .25em;
         @media (min-width: 1100px) {
+            padding: 3rem 1.75rem;
             height: 70vh;
             gap: 1.5em;
         }
@@ -114,22 +113,27 @@
     .profile-pic {
         display: flex;
         justify-content: center;
-        margin-bottom: 1rem;
         img {
             object-fit: cover;
             border-radius: 50%;
             width: 140px;
             height: 140px;
         }
+        @media (min-width: 600pçx) {
+            margin-bottom: 1emc;
+        }
     }
 
     .flag-usa {
         display: block;
-        margin: 0.5em auto;
-        width: 150px;
+        margin: 0.75em auto;
+        width: 100px;
         height: auto;
         border: 1px solid #ccc;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        @media (min-width: 600px) {
+            width: 150px;
+        }
     }
     
     h1 {
@@ -158,10 +162,6 @@
             grid-template-columns: 1fr 1fr;
             gap: 2em;
         }
-    }
-
-    details:not([open]) {
-        height: 8vh;
     }
 
     details {
