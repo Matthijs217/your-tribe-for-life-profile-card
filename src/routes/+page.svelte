@@ -2,11 +2,13 @@
     let { data } = $props(); // rune die data doorgeeft tussen page.server.js en page.svelte ("magische property")
 
     // Zet de members uit de data in een constante
-    const member = data.members[0]; // We pakken de eerste naam uit de array
+    const member = data.members; // We pakken de eerste naam uit de array
 </script>
 
 <!-- Autoplay voor het automatisch afspelen en loop zodat die opnieuw kan afspelen na het einde -->
-<video class="bg-video" src="/newyork.webm" autoplay loop muted></video>
+<video class="bg-video" src="/newyork.webm" autoplay loop muted >
+    <track src="captions_en.vtt" kind="captions" srclang="en" label="english_captions">
+</video>
 
 <main>
     <section>
@@ -59,11 +61,11 @@
 
         <div class="socials">
             <a href="https://github.com/Matthijs217">
-                <img src="/github.webp" alt="GitHub logo">
+                <img src="/github.webp" alt="GitHub logo" width="85" height="85">
             </a>
 
             <a href="https://www.linkedin.com/in/matthijs-ten-brink-7620612a8/">
-                <img src="/linkedin.webp" alt="LinkedIn logo">
+                <img src="/linkedin.webp" alt="LinkedIn logo" width="85" height="85">
             </a>
         </div>
     </section>
