@@ -59,11 +59,11 @@
 
         <div class="socials">
             <a href="https://github.com/Matthijs217">
-                <img src="/github.webp" alt="GitHub logo" width="85" height="85">
+                <img src="/github.webp" alt="GitHub logo">
             </a>
 
             <a href="https://www.linkedin.com/in/matthijs-ten-brink-7620612a8/">
-                <img src="/linkedin.webp" alt="LinkedIn logo" width="85" height="85">
+                <img src="/linkedin.webp" alt="LinkedIn logo">
             </a>
         </div>
     </section>
@@ -222,8 +222,8 @@
         img {
             object-fit: cover;
             border-radius: 50%;
-            width: 85px;
-            height: 85px;
+            max-width: 85px;
+            max-height: 85px;
         }
     }
 
