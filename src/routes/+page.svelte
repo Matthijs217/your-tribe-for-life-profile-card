@@ -200,7 +200,7 @@
         padding: 1em 2em;
         border: none;
         border-radius: 10px;
-        background-color: #007BFF;
+        background-color: #016cde;
         color: white;
         cursor: pointer;
         transition: background-color 0.3s ease;
