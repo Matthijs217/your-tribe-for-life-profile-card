@@ -1,8 +1,7 @@
 <script>
-    let { data } = $props(); // rune die data doorgeeft tussen page.server.js en page.svelte ("magische property")
-
-    // Zet de members uit de data in een constante
-    const member = data.members; // We pakken de eerste naam uit de array
+    import { onMount } from "svelte";
+    let { data } = $props();
+    const member = data.members;
 </script>
 
 <!-- Autoplay voor het automatisch afspelen en loop zodat die opnieuw kan afspelen na het einde -->
@@ -26,53 +25,47 @@
         <p class="bio">{member.bio}</p>
 
         <div class="details-grid">
-            <details name="favorites" open>
-                <summary>Favoriete hobby</summary>
-                <div class="content">
-                    <p>{member.fav_hobby}</p>
-                </div>
-            </details>
-                
-            <details name="favorites">
-                <summary>Favoriete Keuken</summary>
-                <div class="content">
-                    <p>{member.fav_kitchen}</p>
-                </div>
-            </details>
-
-            <details name="favorites">
-                <summary>Favoriete Emoji</summary>
-                <div class="content">
-                    <p>{member.fav_emoji}</p>
-                </div>
-            </details>
-
-            <details name="favorites">
-                <summary>Favoriet Dier</summary>
-                <div class="content">
-                    <p>{member.fav_animal}</p>
-                </div>
-            </details>
+            <button class="button-about-me" popovertarget="aboutPopover">Over mij</button>
+            <div popover id="aboutPopover">
+            <dl>
+                <dt>Favoriete hobby:</dt>
+                <dd>{member.fav_hobby}</dd>
+                <dt>Favoriete keuken:</dt>
+                <dd>{member.fav_kitchen}</dd>
+                <dt>Favoriete emoji:</dt>
+                <dd>{member.fav_emoji}</dd>
+                <dt>Favoriete dier:</dt>
+                <dd>{member.fav_animal}</dd>
+            </dl>
+            <button popovertarget="aboutPopover">Sluiten</button>
+            </div>
         </div>
 
-        <a href="https://www.instagram.com/stories/highlights/18467473987075747/">
-            <img class="flag-usa" src="/usa.webp" alt="Vlag van de Verenigde Staten" width="100" height="53">
-        </a>
-
         <div class="socials">
-            <a href="https://github.com/Matthijs217">
-                <img src="/github.webp" alt="GitHub logo" width="85" height="85">
+            <a href="https://www.instagram.com/stories/highlights/18467473987075747/" class="flag-usa-link">
+                <img class="flag-usa" src="/usa.webp" alt="Vlag van de Verenigde Staten" width="100" height="53">
             </a>
-
-            <a href="https://www.linkedin.com/in/matthijs-ten-brink-7620612a8/">
-                <img src="/linkedin.webp" alt="LinkedIn logo" width="85" height="85">
+            <a href="https://github.com/Matthijs217" class="github-link">
+                <img src="/github.webp" alt="GitHub logo" width="60" height="60">
+            </a>
+            <a href="https://www.linkedin.com/in/matthijs-ten-brink-7620612a8/" class="linkedin-link">
+                <img src="/linkedin.webp" alt="LinkedIn logo" width="60" height="85">
             </a>
         </div>
     </section>
 </main>
 
 <style>
+    @font-face {
+        font-family: 'NewYork';
+        src: url('/NewYork.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
     main {
+        font-family: 'NewYork', 'Gotham', 'Times New Roman', Times, serif;
         position: relative;
         min-height: 100vh;
         z-index: 0;
@@ -98,17 +91,19 @@
         padding: 1.5rem 1.75rem;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        height: 85vh;
+        height: 70vh;
         width: clamp(230px, 65%, 90vw);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: .75em;
+        @media (min-width: 600px) {
+            gap: 0.1em;
+        }
         @media (min-width: 1100px) {
             padding: 3rem 1.75rem;
             height: 70vh;
-            gap: 1.5em;
         }
     }
 
@@ -121,26 +116,14 @@
             width: 140px;
             height: 140px;
         }
-        @media (min-width: 600pçx) {
-            margin-bottom: 1emc;
+        @media (min-width: 600px) {
+            margin-bottom: 1em;
         }
     }
 
-    .flag-usa {
-        display: block;
-        margin: 0.75em auto;
-        width: 100px;
-        height: auto;
-        border: 1px solid #ccc;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        @media (min-width: 600px) {
-            width: 150px;
-        }
-    }
     
     h1 {
         text-align: center;
-        font-family: 'Gotham', 'Times New Roman', Times, serif;
         margin: 0;
         padding: 0;
         @media (min-width: 600px) {
@@ -159,73 +142,143 @@
 
     .details-grid {
         display: grid;
-        grid-template-columns:1fr;
+        grid-template-columns:1fr 1fr;
+        grid-auto-rows: 1fr;
+        grid-template-rows: min-content;
+        gap: .5em;
+        align-items: stretch;
         @media (min-width: 600px) {
             grid-template-columns: 1fr 1fr;
             gap: 2em;
         }
     }
 
-    details {
+    #aboutPopover {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1em;
+        font-size: 0.9em;
+        background-color: #f9f9f9;
+        color: #333;
+        max-width: 300px;
+        text-align: center;
+        @media (min-width: 600px) {
+            font-size: 1.1em;
+            max-width: 500px;
+        }
+        @media (min-width: 1100px) {
+            font-size: 1.25em;
+            max-width: 500px;
+        }
+        dl {
+            font-family: 'Gotham', 'Times New Roman', Times, serif;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-items: start;
+            gap: .5em 1em;
+            dt {
+                font-weight: bold;
+            }
+        }
+        button {
+            margin-top: 1em;
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    }
+
+    .button-about-me {
+        padding: 1em 2em;
+        border: none;
+        border-radius: 10px;
+        background-color: #007BFF;
+        color: white;
         cursor: pointer;
+        transition: background-color 0.3s ease;
+        grid-column: span 2; /* Neem de volledige breedte van de grid in beslag */
+        justify-self: center;
+        font-family: 'Gotham', 'Times New Roman', Times, serif;
+
+    }
+    .button-about-me:hover {
+        background-color: #0056b3;
     }
 
-    @media (min-width: 1100px) {
-        details:nth-of-type(1) {
-            position: absolute;
-            top: 15%;
-            left: 10%;
-        }
-        details:nth-of-type(2) {
-            position: absolute;
-            top: 15%;
-            right: 10%;
-        }
-        details:nth-of-type(3) {
-            position: absolute;
-            bottom: 15%;
-            left: 10%;
-        }
-        details:nth-of-type(4) {
-            position: absolute;
-            bottom: 15%;
-            right: 10%;
-        }
-    }
-
-    summary {
-        font-weight: bold;
-        font-size: 1.1em;
-        display: flex;
-        align-items: center;
-        list-style: none;
-        position: relative;
-    }
-
-    /* Verplaats het standaard pijltje naar rechts */
-    summary::-webkit-details-marker {
-        display: none;
-    }
-    summary::after {
-        content: "▶";
-        transition: transform 0.2s;
-        margin-right: 0;
-        margin-left: .5em;
-    }
-    details[open] summary::after {
-        transform: rotate(90deg);
-    }
 
     .socials {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr;
+        gap: 1em;
         justify-content: center;
         align-items: center;
-        gap: 1em;
-        img {
-            object-fit: cover;
-            border-radius: 50%;
-            max-width: 85px;
-            max-height: 85px;
+        margin-top: 2vh;
+    }
+    .flag-usa-link {
+        grid-column: 1 / 3;
+        grid-row: 1;
+        display: flex;
+        justify-content: center;
+    }
+    .github-link {
+        grid-column: 1;
+        grid-row: 2;
+        display: flex;
+        justify-content: center;
+    }
+    .linkedin-link {
+        grid-column: 2;
+        grid-row: 2;
+        display: flex;
+        justify-content: center;
+    }
+    .flag-usa {
+        width: 100%;
+        max-width: 120px;
+        height: auto;
+        border-radius: 0 !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ccc;
+        display: block;
+        margin: 0 auto;
+    }
+    .socials img:not(.flag-usa) {
+        object-fit: cover;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        @media (min-width: 1100px) {
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    @media (min-width: 600px) {
+        .socials {
+            margin-top: 5vh ;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr;
+        }
+        .github-link {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .flag-usa-link {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        .linkedin-link {
+            grid-column: 3;
+            grid-row: 1;
         }
     }
 
