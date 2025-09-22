@@ -102,8 +102,9 @@
             gap: 0.1em;
         }
         @media (min-width: 1100px) {
+            gap: 1em;
             padding: 3rem 1.75rem;
-            height: 70vh;
+            height: 65vh;
         }
     }
 
